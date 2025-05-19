@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Sato's Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/main.css" />
+    <script src="./js/main.js"></script>
+</head>
+<body class="dark">
+    <div class="container">
+        <div class="header">
+            <h1>Sato's Hub</h1>
+            <div class="mode-switch">
+                <button id="viewToggle" onclick="toggleView()" title="Switch view">⊞</button>
+                <button id="modeToggle" onclick="toggleMode()" title="Switch mode" style="margin-left:10px;">☀️</button>
+            </div>             
+        </div>
+        <div class="search-bar">
+            <input type="text" id="inputField" placeholder="Search projects..." onkeyup="filterList()" autocomplete="off" />
+        </div>
+        <ul id="suggestionsList" class="list-view">
+            <li>
+                <a href="https://satolg.github.io/walking_pkmn_trainer/" class="item-link" target="_blank">
+                    <img src="./img/trainer_sprite.png" alt="walking_pkmn_trainer" class="item-icon-img" />
+                    <span class="item-label">Walking Pkmn Trainer</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://satolg.github.io/city_of_god_flight/" class="item-link" target="_blank">
+                    <img src="./img/gdad_bird_sprite.png" alt="city_of_god_flight" class="item-icon-img" />
+                    <span class="item-label">City of God Flight</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
