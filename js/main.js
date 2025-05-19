@@ -30,3 +30,16 @@ function toggleView() {
         btn.textContent = '⊞';
     }
 }
+
+function openInIframe(event, url) {
+    event.preventDefault();
+    document.getElementById('suggestionsList').style.display = 'none';
+    document.getElementById('iframeContainer').style.display = 'flex';
+    document.getElementById('projectIframe').src = url;
+}
+
+function closeIframe() {
+    document.getElementById('iframeContainer').style.display = 'none';
+    document.getElementById('suggestionsList').style.display = '';
+    document.getElementById('projectIframe').src = '';
+}
