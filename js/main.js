@@ -9,6 +9,13 @@ function filterList() {
 function toggleMode() {
     const body = document.body;
     const btn = document.getElementById('modeToggle');
+    const homeBtn = document.getElementById('homeIcon');
+
+    if (homeBtn) {
+        homeBtn.classList.toggle('dark');
+        homeBtn.src = homeBtn.classList.contains('dark') ? './img/dark_home.png' : './img/assets/home.png';
+    }
+
     body.classList.toggle('dark');
     if (body.classList.contains('dark')) {
         btn.textContent = '☀️';
@@ -31,15 +38,23 @@ function toggleView() {
     }
 }
 
-function openInIframe(event, url) {
+function openInIframe(event, url, icon, label) {
     event.preventDefault();
     document.getElementById('suggestionsList').style.display = 'none';
+    document.querySelector('.search-bar').style.display = 'none';
     document.getElementById('iframeContainer').style.display = 'flex';
     document.getElementById('projectIframe').src = url;
+
+    const pageTitle = document.getElementById('pageTitle');
+    if (pageTitle) pageTitle.textContent = label;
 }
 
 function closeIframe() {
     document.getElementById('iframeContainer').style.display = 'none';
     document.getElementById('suggestionsList').style.display = '';
+    document.querySelector('.search-bar').style.display = '';
     document.getElementById('projectIframe').src = '';
+
+    const pageTitle = document.getElementById('pageTitle');
+    if (pageTitle) pageTitle.textContent = "Sato's Hub";
 }
