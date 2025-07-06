@@ -539,6 +539,16 @@ ul#suggestionsList li:nth-child(10) {
     opacity: 1;
 }
 
+@media (min-width: 900px) {
+    #suggestionsList.grid-view {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 16px 12px;
+        align-content: start;
+        justify-content: space-between;
+    }
+}
+
 /* Mobile responsive grid layout */
 @media (max-width: 900px) and (min-width: 600px) {
     #suggestionsList.grid-view {

@@ -301,6 +301,54 @@ class PhysicsParticles {
         this.canvas.addEventListener('mousemove', updateMousePosition);
         window.addEventListener('mousemove', updateMousePosition);
         
+        // Add touch tracking for mobile devices
+        const updateTouchPosition = (e) => {
+            if (e.touches && e.touches.length > 0) {
+                const touch = e.touches[0];
+                const rect = this.canvas.getBoundingClientRect();
+                this.mouse.position.x = touch.clientX - rect.left;
+                this.mouse.position.y = touch.clientY - rect.top;
+                
+                // Debug: Log touch position occasionally
+                if (Math.random() < 0.01) {
+                    console.log('Touch:', this.mouse.position.x, this.mouse.position.y);
+                }
+            }
+        };
+        
+        // Touch event handlers
+        this.canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Prevent scrolling
+            updateTouchPosition(e);
+        });
+        
+        this.canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault(); // Prevent scrolling
+            updateTouchPosition(e);
+        });
+        
+        this.canvas.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            // Reset mouse position when touch ends
+            this.mouse.position.x = -1000;
+            this.mouse.position.y = -1000;
+        });
+        
+        this.canvas.addEventListener('touchcancel', (e) => {
+            e.preventDefault();
+            // Reset mouse position when touch is cancelled
+            this.mouse.position.x = -1000;
+            this.mouse.position.y = -1000;
+        });
+        
+        // Also add touch events to window for better coverage
+        window.addEventListener('touchmove', updateTouchPosition, { passive: false });
+        
+        window.addEventListener('touchend', () => {
+            this.mouse.position.x = -1000;
+            this.mouse.position.y = -1000;
+        });
+        
         // Reset mouse position when mouse leaves canvas
         this.canvas.addEventListener('mouseleave', () => {
             this.mouse.position.x = -1000;
