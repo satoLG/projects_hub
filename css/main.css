@@ -4,25 +4,37 @@ html, body {
     padding: 0;
 }
 :root {
-    --bg: #f5f5f5;
-    --container-bg: #fff;
+    --bg: linear-gradient(135deg, #4682B4 0%, #5F9EA0 50%, #6495ED 100%);
+    --container-bg: #ebebebe6;
     --text: #222;
-    --input-bg: #ebebeb;
-    --item-bg: #fafafa;
+    --input-bg: #14141424;
+    --switch-bg: linear-gradient(135deg, #4682B4 0%, #5F9EA0 50%, #6495ED 100%);
+    --item-bg: #ebebebe6;
     --item-hover: #e0e0e0;
     --box-shadow-color: #00000008;
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.06);
+    --card-hover-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 8px 16px rgba(0, 0, 0, 0.1);
+    --particle-color: rgba(255, 255, 255, 0.9);
+    --particle-glow: rgba(255, 255, 255, 0.6);
+    --particle-size: 2px;
 }
 body.dark {
-    --bg: #181a1b;
-    --container-bg: #23272a;
+    --bg: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2d3748 100%);
+    --container-bg: rgba(35, 39, 42, 0.9);
     --text: #f5f5f5;
-    --input-bg: #141414;
+    --switch-bg: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2d3748 100%);
+    --input-bg: #14141424;
     --item-bg: #2a2f33;
     --item-hover: #36393f;
     --box-shadow-color: #ffffff17;
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
+    --card-hover-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 8px 16px rgba(0, 0, 0, 0.3);
+    --particle-color: rgba(255, 255, 255, 1);
+    --particle-glow: rgba(200, 220, 255, 0.8);
+    --particle-size: 1px;
 }
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'JetBrains Mono', monospace;
     background: var(--bg);
     color: var(--text);
     margin: 0;
@@ -30,8 +42,10 @@ body {
     min-height: 100vh;
     height: 100vh;
     width: 100vw;
-    transition: background 0.3s, color 0.3s;
+    transition: background 0.8s ease;
     box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
 }
 .container {
     display: flex;
@@ -42,10 +56,12 @@ body {
     width: 100vw;
     max-width: none;
     margin: 0;
-    background: var(--container-bg);
+    background: transparent;
     border-radius: 0;
     box-shadow: none;
     padding: 0;
+    position: relative;
+    z-index: 1;
 }
 .header {
     display: flex;
@@ -54,6 +70,8 @@ body {
     padding: 10px 20px;
     background: var(--container-bg);
     box-shadow: 0 1px 2px var(--box-shadow-color);
+    backdrop-filter: blur(10px);
+    transition: background 0.8s ease, backdrop-filter 0.8s ease;
 }
 .header-title {
     display: flex;
@@ -61,7 +79,7 @@ body {
 }
 span#pageTitle {
     font-size: 25px;
-    font-weight: bold;
+    /* font-weight: bold; */
     padding-top: 5px;
     white-space: nowrap;
     max-width: 180px;
@@ -91,20 +109,77 @@ span#pageTitle {
     display: flex;
     justify-content: flex-end;
 }
-.mode-switch button {
+/* Switch toggle styles */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-left: 10px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--switch-bg);
+    transition: .3s;
+    border-radius: 34px;
+    box-shadow: 0 1px 2px var(--box-shadow-color);
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: var(--container-bg);
+    transition: .3s;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     display: flex;
     align-items: center;
-    width: 50px;
-    background: var(--input-bg);
-    color: var(--text);
-    border: none;
-    border-radius: 20px;
-    padding: 6px 18px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background 0.3s, color 0.3s;
-    box-shadow: 0 1px 2px var(--box-shadow-color);
     justify-content: center;
+    font-size: 14px;
+}
+
+.slider.dark-mode:before {
+    content: "☀️";
+}
+
+.slider.dark-mode.checked:before {
+    content: "🌙";
+}
+
+.slider.view-mode:before {
+    content: "☰";
+}
+
+.slider.view-mode.checked:before {
+    content: "⊞";
+}
+
+input:checked + .slider {
+    background-color: var(--item-hover);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.switch:first-child {
+    margin-left: 0;
 }
 .search-bar {
     display: flex;
@@ -115,6 +190,7 @@ span#pageTitle {
     margin: 24px 20px 16px 20px;
     box-shadow: 0 1px 2px var(--box-shadow-color);
     transition: background 0.3s;
+    backdrop-filter: blur(10px);
 }
 .search-bar input {
     border: none;
@@ -123,29 +199,108 @@ span#pageTitle {
     font-size: 1.2em;
     width: 100%;
     color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+}
+.search-bar input::placeholder {
+    color: var(--text);
+    opacity: 0.6;
 }
 ul#suggestionsList {
     list-style: none;
     padding: 0 20px 0 20px;
-    margin: 0;
+    margin: 20px 0 0 0; /* Add top margin to prevent card overflow */
     flex: 1 1 auto;
     overflow-y: auto;
+    perspective: 1000px;
 }
 ul#suggestionsList li {
     background: var(--item-bg);
-    margin-bottom: 12px;
-    padding: 18px 16px;
-    border-radius: 14px;
+    margin: 8px 0; /* Increased margin to accommodate scaling */
+    padding: 24px 20px; /* Increased padding for better text spacing */
+    border-radius: 16px;
     font-size: 1.1em;
-    box-shadow: 0 1px 2px var(--box-shadow-color);
-    transition: background 0.2s, color 0.2s;
+    box-shadow: var(--card-shadow);
+    transition: background 0.3s ease, box-shadow 0.3s ease; /* Only transition background and shadow, let JS handle transform */
+    animation: popIn 0.4s ease-out forwards;
+    transform: scale(0.3);
+    opacity: 0;
+    backdrop-filter: blur(10px);
+    transform-style: preserve-3d;
+    transform-origin: center center;
+    will-change: transform, box-shadow, background;
+    cursor: pointer;
+}
+
+/* Animation keyframes */
+@keyframes popIn {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(-20px) scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Staggered animation delays */
+ul#suggestionsList li:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+ul#suggestionsList li:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+ul#suggestionsList li:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+ul#suggestionsList li:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+ul#suggestionsList li:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+ul#suggestionsList li:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+ul#suggestionsList li:nth-child(7) {
+    animation-delay: 0.7s;
+}
+
+ul#suggestionsList li:nth-child(8) {
+    animation-delay: 0.8s;
+}
+
+ul#suggestionsList li:nth-child(9) {
+    animation-delay: 0.9s;
+}
+
+ul#suggestionsList li:nth-child(10) {
+    animation-delay: 1.0s;
 }
 ul#suggestionsList li:last-child {
     margin-bottom: 24px;
 }
-ul#suggestionsList li:hover {
-    background: var(--item-hover);
-}
+/* Removed CSS hover - all effects handled by JavaScript */
 .item-link {
     display: flex;
     align-items: center;
@@ -153,6 +308,10 @@ ul#suggestionsList li:hover {
     color: inherit;
     width: 100%;
     height: 100%;
+    min-width: 0; /* Allow flex item to shrink below content size */
+    pointer-events: auto; /* Ensure clicks work */
+    position: relative;
+    z-index: 1;
 }
 .item-icon-img {
     width: 2.2em;
@@ -166,13 +325,15 @@ ul#suggestionsList li:hover {
     display: block;
 }
 .item-label {
-    /* flex: 1 1 auto; */
     font-size: 1.1em;
-    word-break: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    /* flex: 1 1 auto; */
+    min-width: 0; /* Allow flex item to shrink */
 }
-ul#suggestionsList li {
-    padding: 0;
-}
+/* Removed conflicting padding rule - let main li rule handle padding */
 #suggestionsList.list-view {
     display: block;
 }
@@ -181,8 +342,8 @@ ul#suggestionsList li {
     grid-template-columns: repeat(3, 1fr);
     gap: 18px 18px;
     padding: 0 20px 0 20px;
-    max-height: 50vh;           /* Limit grid height to half the viewport */
     align-content: start;       /* Align items to the top of the grid area */
+    margin-bottom: 10px;
 }
 #suggestionsList.grid-view li {
     margin-bottom: 0;
@@ -192,12 +353,15 @@ ul#suggestionsList li {
     min-width: 0;
     height: 100%;
     max-height: 180px;          /* Prevent single row items from stretching too tall */
+    animation: popIn 0.4s ease-out forwards;
+    transform: scale(0.3);
+    opacity: 0;
 }
 #suggestionsList.grid-view .item-link {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 18px 0;
+    padding: 18px 12px;
     width: 100%;
     height: 100%;
     min-height: 140px;
@@ -209,7 +373,11 @@ ul#suggestionsList li {
 }
 #suggestionsList.grid-view .item-label {
     text-align: center;
-    word-break: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    max-width: 100%;
 }
 #suggestionsList.grid-view li {
     height: 100%;
@@ -220,25 +388,75 @@ ul#suggestionsList li {
     align-items: stretch;
 }
 #iframeContainer {
-    position: fixed !important;
-    top: 70px !important;
+    position: fixed;
+    top: var(--header-height, 60px);
     left: 0;
     width: 100vw;
-    height: calc(100vh - 70px);
-    background: var(--bg, #181a1b);
+    height: calc(100vh - var(--header-height, 60px));
+    background: var(--bg);
     z-index: 1000;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
     display: none;
+    overflow: hidden;
 }
+
 #iframeContainer iframe {
-    width: 96vw;
-    height: 85vh;
+    width: 100%;
+    height: 100%;
     border: none;
-    border-radius: 14px;
+    border-radius: 0;
     background: #fff;
-    box-shadow: 0 2px 16px #0004;
-    display: block;
-    margin: 0 auto;
+    transform-origin: center center;
+    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Expanding card animation styles */
+.expanding-card {
+    position: fixed !important;
+    z-index: 999;
+    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform-origin: center center;
+    overflow: hidden;
+    list-style: none !important;
+    list-style-type: none !important;
+}
+
+.expanding-card::before,
+.expanding-card::after {
+    display: none !important;
+}
+
+.expanding-card .item-link {
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.expanding-card.expanding .item-link {
+    opacity: 0;
+}
+
+.card-expanding-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.card-expanding-overlay.visible {
+    opacity: 1;
+}
+
+/* Mobile responsive grid layout */
+@media (max-width: 900px) {
+    #suggestionsList.grid-view {
+        display: grid;
+        grid-template-columns: 45% 45%;
+        padding: 0 20px 0 20px;
+        align-content: start;
+        justify-content: space-between;
+    }
 }

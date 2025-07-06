@@ -2,43 +2,71 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>Sato's Hub</title>
+    <title>sato_hub</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./css/main.css" />
-    <script src="./js/main.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/main.css?v=1" />
+    <script src="./js/particles.js?v=1"></script>
+    <script src="./js/main.js?v=1"></script>
 </head>
 <body class="dark">
     <div class="container">
         <div class="header">
             <div class="header-title">
                 <img id="homeIcon" onclick="closeIframe()" src="./img/home.png" alt="Home" style="width:2em; height:2em; margin-right:0.6em; vertical-align:middle;" />
-                <span id="pageTitle">Sato's Hub</span>
+                <span id="pageTitle">sato_hub</span>
             </div>
 
             <div class="mode-switch">
-                <button id="viewToggle" onclick="toggleView()" title="Switch view">⊞</button>
-                <button id="modeToggle" onclick="toggleMode()" title="Switch mode" style="margin-left:10px;">☀️</button>
+                <label class="switch" title="Switch view">
+                    <input type="checkbox" id="viewToggle" onchange="toggleView()" checked>
+                    <span class="slider view-mode checked"></span>
+                </label>
+                <label class="switch" title="Switch mode">
+                    <input type="checkbox" id="modeToggle" onchange="toggleMode()" checked>
+                    <span class="slider dark-mode checked"></span>
+                </label>
             </div>             
         </div>
         <div class="search-bar">
             <input type="text" id="inputField" placeholder="Search projects..." onkeyup="filterList()" autocomplete="off" />
         </div>
-        <ul id="suggestionsList" class="list-view">
+        <ul id="suggestionsList" class="grid-view">
             <li>
-                <a href="https://satolg.github.io/walking_pkmn_trainer/" class="item-link" onclick="openInIframe(event, this.href, './img/trainer_sprite.png', 'Walking Pkmn Trainer')">
+                <a href="https://satolg.github.io/walking_pkmn_trainer/" class="item-link" onclick="openInIframe(event, this.href, './img/trainer_sprite.png', 'walking_pkmn_trainer')">
                     <img src="./img/trainer_sprite.png" alt="walking_pkmn_trainer" class="item-icon-img" />
-                    <span class="item-label">Walking Pkmn Trainer</span>
+                    <span class="item-label">walking_pkmn_trainer</span>
                 </a>
             </li>
             <li>
-                <a href="https://satolg.github.io/city_of_god_flight/" class="item-link" onclick="openInIframe(event, this.href, './img/gdad_bird_sprite.png', 'City of God Flight')">
+                <a href="https://satolg.github.io/city_of_god_flight/" class="item-link" onclick="openInIframe(event, this.href, './img/gdad_bird_sprite.png', 'city_of_god_flight')">
                     <img src="./img/gdad_bird_sprite.png" alt="city_of_god_flight" class="item-icon-img" />
-                    <span class="item-label">City of God Flight</span>
+                    <span class="item-label">city_of_god_flight</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://satolg.github.io/trystero_walking_pkmn_trainer/" class="item-link" onclick="openInIframe(event, this.href, './img/pkball.png', 'trystero_walking_pkmn_trainer')">
+                    <img src="./img/pkball.png" alt="trystero_walking_pkmn_trainer" class="item-icon-img" />
+                    <span class="item-label">trystero_walking_pkmn_trainer</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://satolg.github.io/trystero_3d_lab/" class="item-link" onclick="openInIframe(event, this.href, './img/codepen.png', 'trystero_3d_lab')">
+                    <img src="./img/codepen.png" alt="trystero_3d_lab" class="item-icon-img" />
+                    <span class="item-label">trystero_3d_lab</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://leosato.tech/" class="item-link" onclick="openInIframe(event, this.href, './img/dev.ico', 'leosato.tech')">
+                    <img src="./img/dev.ico" alt="leosato.tech" class="item-icon-img" />
+                    <span class="item-label">leosato.tech</span>
                 </a>
             </li>
         </ul>
-        <div id="iframeContainer" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:var(--bg, #181a1b); z-index:1000; flex-direction:column; align-items:center; justify-content:flex-start;">
-            <iframe id="projectIframe" src="" style="width:96vw; height:85vh; border:none; border-radius:14px; background:#fff; box-shadow:0 2px 16px #0004; display:block; margin:0 auto;"></iframe>
+        <div id="iframeContainer" style="display:none;">
+            <iframe id="projectIframe" src=""></iframe>
         </div>
     </div>
 </body>
