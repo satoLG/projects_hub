@@ -29,7 +29,7 @@ class PhysicsParticles {
         this.canvas.style.pointerEvents = 'auto'; // Enable mouse immediately
         this.canvas.style.zIndex = '0';
         this.canvas.style.opacity = '0.8';
-        this.canvas.style.filter = 'blur(2px)';
+        this.canvas.style.filter = 'blur(1px)';
 
         document.body.insertBefore(this.canvas, document.body.firstChild);
         
