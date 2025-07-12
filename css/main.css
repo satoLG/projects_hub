@@ -213,6 +213,7 @@ ul#suggestionsList {
     /* margin: 20px 0 0 0; */
     flex: 1 1 auto;
     overflow-y: auto;
+    overflow-x: hidden;
     perspective: 1000px;
 }
 ul#suggestionsList li {
@@ -246,37 +247,43 @@ ul#suggestionsList li:nth-child(1).floating {
 
 ul#suggestionsList li:nth-child(2).floating {
     animation: floating3D 5.5s ease-in-out infinite !important;
-    animation-delay: 0.3s;
+    animation-delay: 0s;
 }
 
 ul#suggestionsList li:nth-child(3).floating {
     animation: floating3D 6.5s ease-in-out infinite !important;
-    animation-delay: 0.6s;
+    animation-delay: 1s;
 }
 
 ul#suggestionsList li:nth-child(4).floating {
     animation: floating3D 5.8s ease-in-out infinite !important;
-    animation-delay: 0.9s;
+    animation-delay: 1.5s;
 }
 
 ul#suggestionsList li:nth-child(5).floating {
     animation: floating3D 6.2s ease-in-out infinite !important;
-    animation-delay: 1.2s;
+    animation-delay: 2s;
 }
 
 /* Floating 3D keyframes */
 @keyframes floating3D {
     0%, 100% {
-        transform: scale(1) rotateX(3deg) rotateY(-3deg) rotateZ(1deg);
+        transform: scale(1) rotateX(1deg) rotateY(-1deg) rotateZ(1deg);
     }
+    10% {
+        transform: scale(1) rotateX(1deg) rotateY(-1deg) rotateZ(1deg);
+    }
+    15% {
+        transform: scale(1) rotateX(1deg) rotateY(-1deg) rotateZ(1deg);
+    }        
     25% {
-        transform: scale(1) rotateX(-1deg) rotateY(2deg) rotateZ(-1deg);
+        transform: scale(1) rotateX(-1deg) rotateY(1deg) rotateZ(-1deg);
     }
     50% {
-        transform: scale(1) rotateX(-3deg) rotateY(-3deg) rotateZ(1deg);
-    }
+        transform: scale(1) rotateX(-1deg) rotateY(-1deg) rotateZ(1deg);
+    } 
     75% {
-        transform: scale(1) rotateX(3deg) rotateY(-3deg) rotateZ(-1deg);
+        transform: scale(1) rotateX(1deg) rotateY(-1deg) rotateZ(-1deg);
     }
 }
 
@@ -414,7 +421,7 @@ ul#suggestionsList li:nth-child(10) {
 #suggestionsList.grid-view {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px 16px;
+    gap: 30px 30px;
     /* padding: 0 20px 0 20px; */
     align-content: start;       /* Align items to the top of the grid area */
     margin-bottom: 10px;
@@ -495,7 +502,7 @@ ul#suggestionsList li:nth-child(10) {
     border-radius: 0;
     background: #fff;
     transform-origin: center center;
-    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 1.6s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 /* Expanding card animation styles */
@@ -543,7 +550,7 @@ ul#suggestionsList li:nth-child(10) {
     #suggestionsList.grid-view {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
-        gap: 16px 12px;
+        gap: 30px 30px;
         align-content: start;
         justify-content: space-between;
     }
@@ -554,7 +561,7 @@ ul#suggestionsList li:nth-child(10) {
     #suggestionsList.grid-view {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 16px 12px;
+        gap: 30px 30px;
         align-content: start;
         justify-content: space-between;
     }
@@ -564,7 +571,7 @@ ul#suggestionsList li:nth-child(10) {
     #suggestionsList.grid-view {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 16px 12px;
+        gap: 30px 30px;
         align-content: start;
         justify-content: space-between;
     }

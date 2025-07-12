@@ -109,7 +109,7 @@ function toggleView() {
         setTimeout(() => {
             item.style.animation = `popIn 0.4s ease-out forwards`;
             item.style.animationDelay = `${(index + 1) * 0.1}s`;
-        }, 50);
+        }, 500);
     });
     
     // Remove transition class after animations
@@ -119,7 +119,7 @@ function toggleView() {
         updateImageSources();
         // Reinitialize 3D effect after view toggle
         reinit3DCardEffect();
-    }, 1000);
+    }, 3000);
 }
 
 function openInIframe(event, url, icon, label) {
@@ -167,7 +167,7 @@ function openInIframe(event, url, icon, label) {
     setTimeout(() => {
         // Use getBoundingClientRect for more precise positioning
         const headerRect = document.querySelector('.header').getBoundingClientRect();
-        const topPosition = headerRect.bottom; // Use bottom of header to avoid any shadow overlap
+        const topPosition = headerRect.bottom + 35; // Use bottom of header to avoid any shadow overlap
         
         clone.style.top = topPosition + 'px';
         clone.style.left = '0px';
@@ -324,7 +324,7 @@ function init3DCardEffect() {
         // Add floating class for continuous 3D animation
         setTimeout(() => {
             card.classList.add('floating');
-        }, 2000); // Start floating after initial animations complete
+        }, 5000); // Start floating after initial animations complete
         
         // Mouse events
         card.addEventListener('mouseenter', handleCardEnter);
@@ -332,9 +332,9 @@ function init3DCardEffect() {
         card.addEventListener('mouseleave', handleCardLeave);
         
         // Touch events for mobile
-        card.addEventListener('touchstart', handleCardTouchStart);
-        card.addEventListener('touchmove', handleCardTouchMove);
-        card.addEventListener('touchend', handleCardTouchEnd);
+        // card.addEventListener('touchstart', handleCardTouchStart);
+        // card.addEventListener('touchmove', handleCardTouchMove);
+        // card.addEventListener('touchend', handleCardTouchEnd);
         
         console.log('3D effect initialized for card:', card);
     });
@@ -474,9 +474,9 @@ function reinit3DCardEffect() {
         card.removeEventListener('mouseleave', handleCardLeave);
         
         // Remove touch events
-        card.removeEventListener('touchstart', handleCardTouchStart);
-        card.removeEventListener('touchmove', handleCardTouchMove);
-        card.removeEventListener('touchend', handleCardTouchEnd);
+        // card.removeEventListener('touchstart', handleCardTouchStart);
+        // card.removeEventListener('touchmove', handleCardTouchMove);
+        // card.removeEventListener('touchend', handleCardTouchEnd);
         
         // Reset classes
         card.classList.remove('floating', 'interacting');
