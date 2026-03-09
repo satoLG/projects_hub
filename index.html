@@ -1,73 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
+<!doctype html>
+<html lang="en">
+  <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>sato_hub</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/main.css?v=2" />
-    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
-    <script src="./js/main.js?v=2"></script>
-</head>
-<body class="dark">
-    <div class="container">
-        <div class="header">
-            <div class="header-title">
-                <img id="homeIcon" onclick="closeIframe()" src="./img/icon/home.png" alt="Home" style="width:2em; height:2em; margin-right:0.6em; vertical-align:middle;" />
-                <span id="pageTitle">sato_hub</span>
-            </div>
-
-            <div class="mode-switch">
-                <label class="switch" title="Switch view">
-                    <input type="checkbox" id="viewToggle" onchange="toggleView()" checked>
-                    <span class="slider view-mode checked"></span>
-                </label>
-                <label class="switch" title="Switch mode">
-                    <input type="checkbox" id="modeToggle" onchange="toggleMode()" checked>
-                    <span class="slider dark-mode checked"></span>
-                </label>
-            </div>             
-        </div>
-        <div class="search-bar">
-            <input type="text" id="inputField" placeholder="Search projects..." onkeyup="filterList()" autocomplete="off" />
-        </div>
-        <ul id="suggestionsList" class="grid-view">
-            <li data-project="walking_pkmn_trainer">
-                <a href="https://satolg.github.io/walking_pkmn_trainer/" class="item-link" onclick="openInIframe(event, this.href, './img/icon/walking_pkmn_trainer.png', 'walking_pkmn_trainer')">
-                    <img src="./img/boxart/walking_pkmn_trainer.png" alt="walking_pkmn_trainer" class="item-icon-img" />
-                    <span class="item-label">walking_pkmn_trainer</span>
-                </a>
-            </li>
-            <li data-project="city_of_god_flight">
-                <a href="https://satolg.github.io/city_of_god_flight/" class="item-link" onclick="openInIframe(event, this.href, './img/icon/city_of_god_flight.png', 'city_of_god_flight')">
-                    <img src="./img/boxart/city_of_god_flight.png" alt="city_of_god_flight" class="item-icon-img" />
-                    <span class="item-label">city_of_god_flight</span>
-                </a>
-            </li>
-            <li data-project="trystero_walking_pkmn_trainer">
-                <a href="https://satolg.github.io/trystero_walking_pkmn_trainer/" class="item-link" onclick="openInIframe(event, this.href, './img/icon/trystero_walking_pkmn_trainer.png', 'trystero_walking_pkmn_trainer')">
-                    <img src="./img/boxart/trystero_walking_pkmn_trainer.png" alt="trystero_walking_pkmn_trainer" class="item-icon-img" />
-                    <span class="item-label">trystero_walking_pkmn_trainer</span>
-                </a>
-            </li>
-            <li data-project="trystero_3d_lab">
-                <a href="https://satolg.github.io/trystero_3d_lab/" class="item-link" onclick="openInIframe(event, this.href, './img/icon/trystero_3d_lab.png', 'trystero_3d_lab')">
-                    <img src="./img/boxart/trystero_3d_lab.png" alt="trystero_3d_lab" class="item-icon-img" />
-                    <span class="item-label">trystero_3d_lab</span>
-                </a>
-            </li>
-            <li data-project="leosatotech">
-                <a href="https://leosato.dev.br" class="item-link" onclick="openInIframe(event, this.href, './img/icon/leosatotech.ico', 'leosato.tech')">
-                    <img src="./img/boxart/leosatotech.png" alt="leosatotech" class="item-icon-img" />
-                    <span class="item-label">leosato (portfolio)</span>
-                </a>
-            </li>
-        </ul>
-        <div id="iframeContainer" style="display:none;">
-            <iframe id="projectIframe" src=""></iframe>
-        </div>
-    </div>
-</body>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+  <body class="dark">
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>
