@@ -25,7 +25,7 @@ export function renderGrid(container: HTMLElement): void {
           <img
             src="${project.boxartPath}"
             alt="${project.name}"
-            loading="lazy"
+            decoding="async"
             onerror="this.onerror=null;this.src='${project.iconPath}'"
           />
         </div>
