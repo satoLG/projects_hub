@@ -214,16 +214,30 @@ body {
 .card-image-wrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 3 / 4;
   overflow: hidden;
   background: var(--bg-secondary);
+  /* Fallback for Safari < 15 / older iOS WebKit (aspect-ratio not supported) */
+  padding-top: 133.33%;
+}
+
+@supports (aspect-ratio: 3 / 4) {
+  .card-image-wrapper {
+    aspect-ratio: 3 / 4;
+    padding-top: 0;
+  }
 }
 
 .card-image-wrapper img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  /* Force GPU compositing layer — helps iOS WebKit render large images in iframes */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 .card-label {
